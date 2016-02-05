@@ -2,9 +2,12 @@ package lab1b;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
+
 /**
- *
- * @author kevin.soares1
+ * @author Kevin Soares 000374322
+ * Date: 02/04/16
+ * Purpose: To calculate the amount of change needed for 1 dollar and out the amount in the respective denominations.
+ * Statement of Authorship: I, Kevin Soares, 000374322 certify that this material is my original work. No other person's work has been used without due acknowledgement.
  */
 public class Lab1B {
 
@@ -12,6 +15,8 @@ public class Lab1B {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // Variables needed
         DecimalFormat df = new DecimalFormat("#.##");
         double priceInput;
         double changeAmount;
@@ -25,19 +30,19 @@ public class Lab1B {
         int nickleAmount = 0;
         int penniesAmount = 0;
         
-        System.out.print("Enter the price of the purchase: ");
-        
-        // Create scanner for input
+        // Create object of type Scanner
         Scanner input = new Scanner(System.in);
         
-        // Get input from user
+        // Output and get the user input
+        System.out.print("Enter the price of the purchase: ");
         priceInput = input.nextDouble();
         
-        // Get change
+        // Get the change for 100 dollars and display
         changeAmount = 100.0 - priceInput;
-        
         System.out.printf("The change from $100.00 is: $%.2f \n", changeAmount);
         
+        
+        // While loops to count the amount of denominations
         while(changeAmount >= 20.0)
         {
             ++twentyAmount;
@@ -92,49 +97,47 @@ public class Lab1B {
             changeAmount -= 0.01;
         }
         
-        if(twentyAmount > 0)
+        // Display if needed the count of denominations
+        DisplayOutput("20", twentyAmount);
+        DisplayOutput("10", tensAmount);
+        DisplayOutput("5", fivesAmount);
+        DisplayOutput("2", twoAmount);
+        DisplayOutput("1", onesAmount);
+        DisplayOutput("Quaters", quatersAmount);
+        DisplayOutput("Dimes", dimeAmount);
+        DisplayOutput("Nickles", nickleAmount);
+        DisplayOutput("Pennies", penniesAmount);
+    }
+    
+    /**
+     * Display the current denomination count
+     * @param denAmount The denomination amount outputted
+     * @param changeAmount The current count of change to output
+     */
+    public static void DisplayOutput(String denAmount, int changeAmount)
+    { 
+        if(changeAmount > 0)
         {
-            System.out.printf("Number of $20 bills is: %d \n", twentyAmount);
-        }
-        
-        if(tensAmount > 0)
-        {
-            System.out.printf("Number of $10 bills is: %d \n", tensAmount);
-        }
-        
-        if(fivesAmount > 0)
-        {
-            System.out.printf("Number of $5 bills is: %d \n", fivesAmount);
-        }
-        
-        if(twoAmount > 0)
-        {
-            System.out.printf("Number of $2 bills is: %d \n", twoAmount);
-        }
-        
-        if(onesAmount > 0)
-        {
-            System.out.printf("Number of $1 bills is: %d \n", onesAmount);
-        }
-        
-        if(quatersAmount > 0)
-        {
-            System.out.printf("Number of quaters is: %d \n", quatersAmount);
-        }
-        
-        if(dimeAmount > 0)
-        {
-            System.out.printf("Number of dimes is: %d \n", dimeAmount);
-        }
-        
-        if(nickleAmount > 0)
-        {
-            System.out.printf("Number of nickles is: %d \n", nickleAmount);
-        }
-        
-        if(penniesAmount > 0)
-        {
-            System.out.printf("Number of pennies is: %d \n", penniesAmount);
+            if(null != denAmount)
+            switch (denAmount) {
+                case "Quaters":
+                case "Dimes":
+                case "Nickles":
+                case "Pennies":
+                    System.out.printf("Number of %s is: %d \n", denAmount, changeAmount);
+                    break;
+                case "20":
+                case "10":
+                case "5":
+                    System.out.printf("Number of %s bills is: %d \n", denAmount, changeAmount);
+                    break;
+                case "2":
+                case "1":
+                    System.out.printf("Number of %s coins is: %d \n", denAmount, changeAmount);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
